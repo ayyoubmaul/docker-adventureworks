@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 
 # ── Config ───────────────────────────────────────────────────
 AW_CONN_ID     = "adventure_works"  # Connection ID untuk PostgreSQL di Airflow
-MINIO_ENDPOINT = Variable.get("MINIO_ENDPOINT") # host.docker.internal:9000
+MINIO_ENDPOINT = Variable.get("MINIO_ENDPOINT") # host.docker.internal:9000	
 MINIO_ACCESS   = Variable.get("MINIO_ACCESS_KEY") # minioadmin
 MINIO_SECRET   = Variable.get("MINIO_SECRET_KEY") # minioadmin123
 MINIO_BUCKET   = Variable.get("MINIO_BUCKET") #adventureworks-elt
@@ -45,7 +45,6 @@ INGEST_TABLES = [
     {"schema": "Production", "table": "Product",            "folder": "product"},
     {"schema": "Production", "table": "ProductSubcategory", "folder": "product_subcategory"},
     {"schema": "Production", "table": "ProductCategory",    "folder": "product_category"},
-    {"schema": "Production", "table": "ProductCategoryDetail",    "folder": "product_category_detail"},
 ]
 
 
@@ -151,12 +150,12 @@ def validate_ingestion(**context):
 
     # DIUBAH: xcom_pull dari task yang di-expand akan mengembalikan LIST of Dictionaries
     ingest_results = ti.xcom_pull(task_ids="ingest_tables")
-
+    
     if not ingest_results:
         raise ValueError("❌ Tidak ada data dari task 'ingest_tables' di XCom!")
 
     results_summary = {}
-
+    
     # Looping langsung dari hasil XCom, tidak perlu lagi looping INGEST_TABLES
     for item in ingest_results:
         table = item["table"]
