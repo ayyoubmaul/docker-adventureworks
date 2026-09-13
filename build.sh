@@ -11,6 +11,13 @@ fi
 echo "Unzipping postgres AdventureWorks zip file.";
 unzip -o adventureworks.zip;
 rm adventureworks.zip;
+
+chmod +x docker-init.sh 2>/dev/null || true
+chmod +x *.sh 2>/dev/null || true
+
+sed -i 's/\r$//' docker-init.sh
+sed -i 's/\r$//' docker-reconfigure.sh
+
 echo "Building postgres docker image.";
 if [[ -f install-a.sql ]] && [[ -f install-a.sql ]] && [[ -f install-a.sql ]] && [[ -f install-a.sql ]]; then
     podman build  --progress=plain . -t chriseaton/adventureworks:postgres -t chriseaton/adventureworks:postgres-16;

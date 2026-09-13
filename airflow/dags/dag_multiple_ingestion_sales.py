@@ -23,7 +23,7 @@ log = logging.getLogger(__name__)
 
 # ── Config ────────────────────────────────────────────────────
 AW_CONN_ID     = "adventure_works"  # Connection ID untuk PostgreSQL di Airflow
-MINIO_ENDPOINT = Variable.get("MINIO_ENDPOINT") # host.docker.internal:9000	
+MINIO_ENDPOINT = Variable.get("MINIO_ENDPOINT") # host.docker.internal:9000
 MINIO_ACCESS   = Variable.get("MINIO_ACCESS_KEY") # minioadmin
 MINIO_SECRET   = Variable.get("MINIO_SECRET_KEY") # minioadmin123
 MINIO_BUCKET   = Variable.get("MINIO_BUCKET") #adventureworks-elt

@@ -21,7 +21,7 @@ services:
 
   # ── MinIO: Object Storage S3-compatible ───────────────────
   minio:
-    image: minio/minio:latest
+    image: quay.io/minio/minio:latest
     container_name: elt_minio
     command: server /data --console-address ":9001"
     environment:
@@ -43,7 +43,7 @@ services:
 
   # ── MinIO Init: buat bucket otomatis saat pertama kali ────
   minio-init:
-    image: minio/mc:latest
+    image: quay.io/minio/mc:latest
     container_name: elt_minio_init
     depends_on:
       minio:
